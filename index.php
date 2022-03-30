@@ -119,13 +119,15 @@
 </div>
 <script type="text/javascript">
     async function submitTransactionData() {
-        // let encryptedPayload = "<?php echo htmlspecialchars($_POST['c'])?>";
-        let e = 'I0ALdPqSZYXXDy/Xtqjui0eSKGZ/n3mEVTd4tkcQmr3IXe+eJHb2TTGDr8nhPfyqek4mHEDuVmKmlrAphrxCYZVIdipGsZq6TPUYngOcOTq4cDs/qIacYXw6ZQ6ui1BRKhSUA2YsMHrUoYvb0znJ+0CPmS6BgheG4iKc0O3Bsn5guZMWYj4S3oCUc9je4jKqu8Ye1CeoVdzUyfiPVs3aVzwj83zmL7R6pxn12TlhSn8f2P/Flhv5nBVSbxhfA1pB4RpmADeVZhr+RgqQZp9E8mOPnIaRQkbwysSM0KPYWKpXywBE+X62+nTl4hnNboIIismm2CxkBF1xRdTQCXIJkJagwAFcxxIFkMdIjzzAGUpseN1PkQdSpmJx1i0NwKo/4S1In0SOR2IgYUVyGdGLFPF70NeWWM+xtqD2kHjJqfCB8H2LcKFyqop2tqFx9uDV6s2vYghuy307CWZthFqiYleaiyx65kkTi3XvX7MWK3xOV1KmsWPSbHnUog7AP6bt';
+        let e = "<?php echo htmlspecialchars($_POST['c'])?>";
+        // let e = 'I0ALdPqSZYXXDy/Xtqjui0eSKGZ/n3mEVTd4tkcQmr3IXe+eJHb2TTGDr8nhPfyqek4mHEDuVmKmlrAphrxCYZVIdipGsZq6TPUYngOcOTq4cDs/qIacYXw6ZQ6ui1BRKhSUA2YsMHrUoYvb0znJ+0CPmS6BgheG4iKc0O3Bsn5guZMWYj4S3oCUc9je4jKqu8Ye1CeoVdzUyfiPVs3aVzwj83zmL7R6pxn12TlhSn8f2P/Flhv5nBVSbxhfA1pB4RpmADeVZhr+RgqQZp9E8mOPnIaRQkbwysSM0KPYWKpXywBE+X62+nTl4hnNboIIismm2CxkBF1xRdTQCXIJkJagwAFcxxIFkMdIjzzAGUpseN1PkQdSpmJx1i0NwKo/4S1In0SOR2IgYUVyGdGLFPF70NeWWM+xtqD2kHjJqfCB8H2LcKFyqop2tqFx9uDV6s2vYghuy307CWZthFqiYleaiyx65kkTi3XvX7MWK3xOV1KmsWPSbHnUog7AP6bt';
         let decrypt = 'https://paynestapis.azurewebsites.net/api/parent/decryptdata';
         let data = {'payload': e};
-        let updateTransaction = "Update Transaction API End-Point"
-        let newUrl='https://www.blank.org'
+        let d = '<Response><Header><ResponseCode>00</ResponseCode><ResponseMsg>success</ResponseMsg></Header><Body><PaymentInformation><CBDReferenceNo>245367</CBDReferenceNo><CCReferenceNo>6482847315686734104005</CCReferenceNo><AuthCode>831000</AuthCode><OrderID>12786</OrderID><AuthorizationDateTime>3/26/2022 12:52:12 PM</AuthorizationDateTime><CardType>002</CardType><MaskedCardNumber>xxxxxxxxxxxx0007</MaskedCardNumber><TokenizedValue/></PaymentInformation></Body></Response>';
+        let updateTransaction = "https://paynestapis.azurewebsites.net/api/parent/updateTransaction"
+        let success='https://www.success.org'
         let parser = new DOMParser();
+        let proceed = false;
         
 
         // POST Decryption request using fetch()
@@ -134,10 +136,8 @@
             // Adding method type
             method: 'POST',
             mode: 'cors',
-
             // Adding body or contents to send
             body: JSON.stringify({'payload': e}),
-
             // Adding headers to the request
             headers: {
                 'Content-Type': 'application/json',
@@ -146,15 +146,24 @@
         )
         .then(response => response.json())
         .then(data => {
-            let xmlDoc = parser.parseFromString(data.decrypted,"text/xml");
+            let xmlDoc = parser.parseFromString(d,"text/xml");
+            let responseCode = xmlDoc.getElementsByTagName("ResponseCode")[0].childNodes[0].nodeValue;
+            if(responseCode == '00'){
             let orderId = xmlDoc.getElementsByTagName("OrderID")[0].childNodes[0].nodeValue;
-            console.log(orderId);
+            let refNo = xmlDoc.getElementsByTagName("CBDReferenceNo")[0].childNodes[0].nodeValue;
+            fetch(updateTransaction,{
+                method: 'POST',
+                mode: 'cors',
+                param: JSON.stringify({'transactionId': orderId}),
+                body:JSON.stringify({'stringFromBank': e, 'bankResponse': data.decrypted, 'refNo': refNo })
+                headers: {
+                'Content-Type': 'application/json',
+            },
+            })
+            .then(response => window.location.assign(success))
+            }
 
-        });
- // Parsing XML Response from Decryption API
-            
-              
-            
+        }); 
     }
     $(document).ready(function () {
         setTimeout(() => {
