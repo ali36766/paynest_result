@@ -138,6 +138,9 @@
             body: {payload: encryptedPayload},
 
             // Adding headers to the request
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
         }
         )
         .then(response => response.json())
