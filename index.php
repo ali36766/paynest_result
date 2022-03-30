@@ -120,9 +120,9 @@
 <script type="text/javascript">
     async function submitTransactionData() {
         // let encryptedPayload = "<?php echo htmlspecialchars($_POST['c'])?>";
-        let encryptedPayload = 'I0ALdPqSZYXXDy/Xtqjui0eSKGZ/n3mEVTd4tkcQmr3IXe+eJHb2TTGDr8nhPfyqek4mHEDuVmKmlrAphrxCYZVIdipGsZq6TPUYngOcOTq4cDs/qIacYXw6ZQ6ui1BRKhSUA2YsMHrUoYvb0znJ+0CPmS6BgheG4iKc0O3Bsn5guZMWYj4S3oCUc9je4jKqu8Ye1CeoVdzUyfiPVs3aVzwj83zmL7R6pxn12TlhSn8f2P/Flhv5nBVSbxhfA1pB4RpmADeVZhr+RgqQZp9E8mOPnIaRQkbwysSM0KPYWKpXywBE+X62+nTl4hnNboIIismm2CxkBF1xRdTQCXIJkJagwAFcxxIFkMdIjzzAGUpseN1PkQdSpmJx1i0NwKo/4S1In0SOR2IgYUVyGdGLFPF70NeWWM+xtqD2kHjJqfCB8H2LcKFyqop2tqFx9uDV6s2vYghuy307CWZthFqiYleaiyx65kkTi3XvX7MWK3xOV1KmsWPSbHnUog7AP6bt';
+        let e = 'I0ALdPqSZYXXDy/Xtqjui0eSKGZ/n3mEVTd4tkcQmr3IXe+eJHb2TTGDr8nhPfyqek4mHEDuVmKmlrAphrxCYZVIdipGsZq6TPUYngOcOTq4cDs/qIacYXw6ZQ6ui1BRKhSUA2YsMHrUoYvb0znJ+0CPmS6BgheG4iKc0O3Bsn5guZMWYj4S3oCUc9je4jKqu8Ye1CeoVdzUyfiPVs3aVzwj83zmL7R6pxn12TlhSn8f2P/Flhv5nBVSbxhfA1pB4RpmADeVZhr+RgqQZp9E8mOPnIaRQkbwysSM0KPYWKpXywBE+X62+nTl4hnNboIIismm2CxkBF1xRdTQCXIJkJagwAFcxxIFkMdIjzzAGUpseN1PkQdSpmJx1i0NwKo/4S1In0SOR2IgYUVyGdGLFPF70NeWWM+xtqD2kHjJqfCB8H2LcKFyqop2tqFx9uDV6s2vYghuy307CWZthFqiYleaiyx65kkTi3XvX7MWK3xOV1KmsWPSbHnUog7AP6bt';
         let decrypt = 'https://paynestapis.azurewebsites.net/api/parent/decryptdata';
-        
+        let data = {'payload': e};
         let updateTransaction = "Update Transaction API End-Point"
         let newUrl='https://www.blank.org'
         let parser = new DOMParser();
@@ -136,7 +136,7 @@
             mode: 'cors',
 
             // Adding body or contents to send
-            body: {'payload': encryptedPayload},
+            body: data,
 
             // Adding headers to the request
             headers: {
