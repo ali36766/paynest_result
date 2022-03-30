@@ -145,7 +145,12 @@
         }
         )
         .then(response => response.json())
-        .then(data => console.log(data));
+        .then(data => {
+            let xmlDoc = parser.parseFromString(data.decrypted,"text/xml");
+            let orderId = xmlDoc.getElementsByTagName("OrderID")[0].childNodes[0].nodeValue;
+            console.log(orderId);
+
+        });
  // Parsing XML Response from Decryption API
             
               
