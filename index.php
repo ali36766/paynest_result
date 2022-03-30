@@ -144,7 +144,7 @@
         })
 
             // Parsing XML Response from Decryption API
-            .then(response =>{ console.log(response)})
+            .then(response =>{ console.log(JSON.stringify(response.decrypted))})
               
             
     }
