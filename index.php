@@ -142,7 +142,7 @@
                 'Content-type': 'application/x-www-form-urlencoded',
             },
         }
-        .then(response =>{ console.log(JSON.stringify(response))});
+        .then(response =>{console.log(response)};
         )
  // Parsing XML Response from Decryption API
             
