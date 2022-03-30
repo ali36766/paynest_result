@@ -133,7 +133,7 @@
 
             // Adding method type
             method: 'POST',
-            mod:e 'cors',
+            mode: 'cors',
 
             // Adding body or contents to send
             body: {'payload': encryptedPayload},
