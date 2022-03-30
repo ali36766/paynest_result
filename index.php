@@ -154,7 +154,7 @@
             fetch(updateTransaction,{
                 method: 'POST',
                 mode: 'cors',
-                param: JSON.stringify({'transactionId': orderId}),
+                param: JSON.stringify({'transactionId': 791}),
                 body:JSON.stringify({'stringFromBank': e, 'bankResponse': data.decrypted, 'refNo': refNo }),
                 headers: {
                 'Content-Type': 'application/json',
