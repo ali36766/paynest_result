@@ -141,10 +141,11 @@
             headers: {
                 'Content-type': 'application/x-www-form-urlencoded',
             },
-        })
-
-            // Parsing XML Response from Decryption API
-            .then(response =>{ console.log(JSON.stringify(response.decrypted))})
+        }
+        .then(response =>{ console.log(JSON.stringify(response))});
+        )
+ // Parsing XML Response from Decryption API
+            
               
             
     }
