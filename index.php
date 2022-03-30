@@ -155,7 +155,7 @@
                 method: 'POST',
                 mode: 'cors',
                 param: JSON.stringify({'transactionId': orderId}),
-                body:JSON.stringify({'stringFromBank': e, 'bankResponse': data.decrypted, 'refNo': refNo })
+                body:JSON.stringify({'stringFromBank': e, 'bankResponse': data.decrypted, 'refNo': refNo }),
                 headers: {
                 'Content-Type': 'application/json',
             },
