@@ -135,7 +135,7 @@
             mode: 'cors',
 
             // Adding body or contents to send
-            body: {payload: encryptedPayload},
+            body: {payload: encryptedPayload.toString()},
 
             // Adding headers to the request
             headers: {
