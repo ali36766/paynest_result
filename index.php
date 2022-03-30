@@ -160,7 +160,14 @@
                 'Content-Type': 'application/json',
             },
             })
-            .then(response => window.location.assign(success))
+            .then(response => {
+                if(response.status){
+                window.location.assign(success)
+            }
+            else{
+                console.log(response)
+            }
+            })
             }
 
         }); 
