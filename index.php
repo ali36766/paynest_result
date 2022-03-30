@@ -151,10 +151,10 @@
             if(responseCode == '00'){
             let orderId = xmlDoc.getElementsByTagName("OrderID")[0].childNodes[0].nodeValue;
             let refNo = xmlDoc.getElementsByTagName("CBDReferenceNo")[0].childNodes[0].nodeValue;
-            fetch(updateTransaction,{
+            let newTransaction = updateTransaction+"?transactionId="+791
+            fetch(newTransaction,{
                 method: 'POST',
                 mode: 'cors',
-                param: JSON.stringify({'transactionId': 791}),
                 body:JSON.stringify({'stringFromBank': e, 'bankResponse': data.decrypted, 'refNo': refNo }),
                 headers: {
                 'Content-Type': 'application/json',
@@ -162,7 +162,8 @@
             })
             .then(response => {
                 if(response.status){
-                window.location.assign(success)
+                    console.log("Success",response)
+                // window.location.assign(success)
             }
             else{
                 console.log(response)
