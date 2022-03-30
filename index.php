@@ -132,6 +132,7 @@
 
             // Adding method type
             method: 'POST',
+            mode: 'cors'
 
             // Adding body or contents to send
             body: {c: encryptedPayload},
