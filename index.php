@@ -136,7 +136,7 @@
             mode: 'cors',
 
             // Adding body or contents to send
-            body: data,
+            body: JSON.stringify({'payload': e}),
 
             // Adding headers to the request
             headers: {
