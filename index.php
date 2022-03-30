@@ -139,7 +139,7 @@
 
             // Adding headers to the request
             headers: {
-                'Content-type': 'application/json; charset=UTF-8',
+                'Content-type': 'application/x-www-form-urlencoded',
             },
         })
 
